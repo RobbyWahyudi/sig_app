@@ -66,12 +66,17 @@ class _MyHomePageState extends State<MyHomePage> {
             Column(
               children: [
                 Container(
+                  alignment: Alignment.center,
                   width: 200,
                   height: 200,
                   margin: const EdgeInsets.only(top: 30, bottom: 5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: Colors.blue[400],
+                  ),
+                  child: const Text(
+                    "Biru",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 ),
                 const Text("Kartu Biru", style: TextStyle(fontSize: 20)),
@@ -80,12 +85,17 @@ class _MyHomePageState extends State<MyHomePage> {
             Column(
               children: [
                 Container(
+                  alignment: Alignment.center,
                   width: 200,
                   height: 200,
                   margin: const EdgeInsets.only(top: 20, bottom: 5),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),
                     color: Colors.green[400],
+                  ),
+                  child: const Text(
+                    "Hijau",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 ),
                 const Text("Kartu Hijau", style: TextStyle(fontSize: 20)),
