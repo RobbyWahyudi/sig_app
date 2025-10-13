@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'halaman/beranda.dart';
+import 'halaman/profil.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,94 +17,48 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
-      home: const MyHomePage(title: 'Beranda'),
+      home: BottomNavExample(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
+class BottomNavExample extends StatefulWidget {
+  const BottomNavExample({super.key});
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<BottomNavExample> createState() => _BottomNavExampleState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _BottomNavExampleState extends State<BottomNavExample> {
+  int _selectedIndex = 0;
+  final PageController _pageController = PageController();
+
+  // daftar halaman
+  final List<Widget> _pages = const [Beranda(), Profil()];
+
+  void _onItemTapped(int index) {
+    setState(() => _selectedIndex = index);
+    _pageController.jumpToPage(index); // pindah halaman
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text(widget.title),
-        centerTitle: true,
+      // appBar: AppBar(title: const Text("Bottom Navigation + PageView")),
+      body: PageView(
+        controller: _pageController,
+        onPageChanged: (index) {
+          setState(() => _selectedIndex = index);
+        },
+        children: _pages,
       ),
-      body: Center(
-        child: Column(
-          children: <Widget>[
-            const SizedBox(height: 50),
-            const Text(
-              'Sistem Informasi Geografis',
-              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 10),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.blue,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-              ),
-              onPressed: () => {print("click")},
-              child: const Text(
-                "Tombol",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            Column(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: 200,
-                  height: 200,
-                  margin: const EdgeInsets.only(top: 30, bottom: 5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.blue[400],
-                  ),
-                  child: const Text(
-                    "Biru",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                ),
-                const Text("Kartu Biru", style: TextStyle(fontSize: 20)),
-              ],
-            ),
-            Column(
-              children: [
-                Container(
-                  alignment: Alignment.center,
-                  width: 200,
-                  height: 200,
-                  margin: const EdgeInsets.only(top: 20, bottom: 5),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.green[400],
-                  ),
-                  child: const Text(
-                    "Hijau",
-                    style: TextStyle(fontSize: 20, color: Colors.white),
-                  ),
-                ),
-                const Text("Kartu Hijau", style: TextStyle(fontSize: 20)),
-              ],
-            ),
-          ],
-        ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        items: const [
+          BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Beranda'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
+        ],
       ),
     );
   }
