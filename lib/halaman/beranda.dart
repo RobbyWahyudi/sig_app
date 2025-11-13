@@ -33,15 +33,32 @@ class HalamanBeranda extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey[50],
       appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        titleSpacing: 16,
         title: const Row(
           children: [
             Icon(Icons.location_on, color: Color.fromRGBO(46, 125, 50, 1)),
-            SizedBox(width: 8),
-            Text('Wisata', style: TextStyle(fontWeight: FontWeight.bold)),
+            SizedBox(width: 5),
+            Text(
+              'Wisata',
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 20,
+                letterSpacing: 0.2,
+              ),
+            ),
           ],
         ),
         actions: [
-          IconButton(icon: const Icon(Icons.menu_rounded), onPressed: () {}),
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: IconButton(
+              icon: const Icon(Icons.menu_rounded),
+              onPressed: () {},
+              color: const Color.fromRGBO(46, 125, 50, 1),
+            ),
+          ),
         ],
       ),
       body: SingleChildScrollView(
@@ -67,13 +84,22 @@ class HalamanBeranda extends StatelessWidget {
                     ),
                   ),
 
-                  // Overlay putih transparan hanya di atas gambar
                   Container(
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
-                      color: Colors.white.withValues(
-                        alpha: 0.4,
-                      ), // ubah 0.4 jadi 0.3 atau 0.5 sesuai selera
+                      gradient: LinearGradient(
+                        colors: [
+                          Colors.black.withOpacity(0.05),
+                          const Color.fromRGBO(
+                            46,
+                            125,
+                            50,
+                            1,
+                          ).withOpacity(0.25),
+                        ],
+                        begin: Alignment.topCenter,
+                        end: Alignment.bottomCenter,
+                      ),
                     ),
                   ),
 
@@ -87,24 +113,33 @@ class HalamanBeranda extends StatelessWidget {
                         const Text(
                           'Temukan Destinasi\nWisata Terbaik di Pamekasan',
                           style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                            height: 1.25,
+                            letterSpacing: 0.2,
                           ),
                         ),
                         const SizedBox(height: 10),
-                        ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromRGBO(46, 125, 50, 1),
+                        FilledButton(
+                          style: FilledButton.styleFrom(
+                            backgroundColor: const Color.fromRGBO(
+                              46,
+                              125,
+                              50,
+                              1,
+                            ),
+                            foregroundColor: Colors.white,
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 10,
+                            ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
                           ),
                           onPressed: () {},
-                          child: const Text(
-                            'Selengkapnya',
-                            style: TextStyle(color: Colors.white),
-                          ),
+                          child: const Text('Selengkapnya'),
                         ),
                       ],
                     ),
@@ -132,7 +167,11 @@ class HalamanBeranda extends StatelessWidget {
             const SizedBox(height: 10),
             const Text(
               'Rekomendasi Terbaik Untukmu',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              style: TextStyle(
+                fontWeight: FontWeight.w700,
+                fontSize: 18,
+                letterSpacing: 0.1,
+              ),
             ),
 
             const SizedBox(height: 12),
@@ -157,25 +196,45 @@ class HalamanBeranda extends StatelessWidget {
 
   Widget _menuItem(IconData icon, String label) {
     return Container(
-      width: 85,
+      width: 95,
       margin: const EdgeInsets.only(right: 12),
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: const Color.fromRGBO(46, 125, 50, 0.15)),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.shade200,
-            blurRadius: 4,
-            spreadRadius: 1,
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
           ),
         ],
       ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Icon(icon, color: Color.fromRGBO(46, 125, 50, 1), size: 28),
-          const SizedBox(height: 6),
-          Text(label, style: const TextStyle(fontSize: 12)),
+          Container(
+            padding: const EdgeInsets.all(10),
+            decoration: const BoxDecoration(
+              color: Color.fromRGBO(46, 125, 50, 0.08),
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              icon,
+              color: const Color.fromRGBO(46, 125, 50, 1),
+              size: 26,
+            ),
+          ),
+          const SizedBox(height: 8),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 12,
+              fontWeight: FontWeight.w600,
+              letterSpacing: 0.1,
+            ),
+          ),
         ],
       ),
     );
