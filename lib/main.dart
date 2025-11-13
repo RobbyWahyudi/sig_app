@@ -90,9 +90,3 @@ class _BottomNavExampleState extends State<BottomNav> {
     );
   }
 }
-
-
-  // void _onItemTapped(int index) {
-  //   setState(() => _selectedIndex = index);
-  //   _pageController.jumpToPage(index); // pindah halaman
-  // }
