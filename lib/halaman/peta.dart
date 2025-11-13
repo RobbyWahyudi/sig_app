@@ -8,7 +8,7 @@ class HalamanPeta extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.grey[50],
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(20),
@@ -21,72 +21,99 @@ class HalamanPeta extends StatelessWidget {
                 children: [
                   const Text(
                     'Peta',
-                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.2,
+                      color: Colors.black87,
+                    ),
                   ),
-                  IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {
-                      // aksi pencarian
-                    },
+                  Container(
+                    decoration: const BoxDecoration(
+                      color: Color.fromRGBO(46, 125, 50, 0.08),
+                      shape: BoxShape.circle,
+                    ),
+                    child: IconButton(
+                      icon: const Icon(Icons.search),
+                      onPressed: () {
+                        // aksi pencarian
+                      },
+                      color: const Color.fromRGBO(46, 125, 50, 1),
+                    ),
                   ),
                 ],
               ),
               const SizedBox(height: 10),
 
               // Peta
-              ClipRRect(
-                borderRadius: BorderRadius.circular(16),
-                child: SizedBox(
-                  height: 350,
-                  child: FlutterMap(
-                    options: const MapOptions(
-                      initialCenter: LatLng(
-                        -7.1617,
-                        113.4828,
-                      ), // Koordinat Pamekasan
-                      initialZoom: 10,
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                  border: Border.all(
+                    color: const Color.fromRGBO(46, 125, 50, 0.12),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      blurRadius: 12,
+                      offset: const Offset(0, 6),
                     ),
-                    children: [
-                      TileLayer(
-                        urlTemplate:
-                            'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
-                        subdomains: const ['a', 'b', 'c'],
+                  ],
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(16),
+                  child: SizedBox(
+                    height: 350,
+                    child: FlutterMap(
+                      options: const MapOptions(
+                        initialCenter: LatLng(
+                          -7.1617,
+                          113.4828,
+                        ), // Koordinat Pamekasan
+                        initialZoom: 10,
                       ),
-                      MarkerLayer(
-                        markers: [
-                          Marker(
-                            point: const LatLng(-7.1617, 113.4828),
-                            width: 40,
-                            height: 40,
-                            child: const Icon(
-                              Icons.park,
-                              color: Colors.green,
-                              size: 30,
+                      children: [
+                        TileLayer(
+                          urlTemplate:
+                              'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                          subdomains: const ['a', 'b', 'c'],
+                        ),
+                        MarkerLayer(
+                          markers: [
+                            Marker(
+                              point: const LatLng(-7.1617, 113.4828),
+                              width: 40,
+                              height: 40,
+                              child: const Icon(
+                                Icons.park,
+                                color: Colors.green,
+                                size: 30,
+                              ),
                             ),
-                          ),
-                          Marker(
-                            point: const LatLng(-7.2, 113.48),
-                            width: 40,
-                            height: 40,
-                            child: const Icon(
-                              Icons.location_on,
-                              color: Colors.blue,
-                              size: 30,
+                            Marker(
+                              point: const LatLng(-7.2, 113.48),
+                              width: 40,
+                              height: 40,
+                              child: const Icon(
+                                Icons.location_on,
+                                color: Colors.blue,
+                                size: 30,
+                              ),
                             ),
-                          ),
-                          Marker(
-                            point: const LatLng(-7.18, 113.5),
-                            width: 40,
-                            height: 40,
-                            child: const Icon(
-                              Icons.museum,
-                              color: Colors.orange,
-                              size: 30,
+                            Marker(
+                              point: const LatLng(-7.18, 113.5),
+                              width: 40,
+                              height: 40,
+                              child: const Icon(
+                                Icons.museum,
+                                color: Colors.orange,
+                                size: 30,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
@@ -96,16 +123,30 @@ class HalamanPeta extends StatelessWidget {
               // Kategori
               const Text(
                 'Kategori',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  letterSpacing: 0.1,
+                ),
               ),
               const SizedBox(height: 15),
 
               // Box kategori
               Container(
+                width: double.infinity,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(16),
-                  border: Border.all(color: Colors.grey.shade300),
+                  border: Border.all(
+                    color: const Color.fromRGBO(46, 125, 50, 0.12),
+                  ),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black.withOpacity(0.05),
+                      blurRadius: 12,
+                      offset: const Offset(0, 6),
+                    ),
+                  ],
                 ),
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
@@ -157,9 +198,24 @@ class _CategoryItem extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, color: color),
+        Container(
+          padding: const EdgeInsets.all(10),
+          decoration: const BoxDecoration(
+            color: Color.fromRGBO(46, 125, 50, 0.08),
+            shape: BoxShape.circle,
+          ),
+          child: Icon(icon, color: color, size: 20),
+        ),
         const SizedBox(width: 8),
-        Text(label, style: const TextStyle(fontSize: 15, color: Colors.black)),
+        Text(
+          label,
+          style: const TextStyle(
+            fontSize: 15,
+            color: Colors.black87,
+            fontWeight: FontWeight.w600,
+            letterSpacing: 0.1,
+          ),
+        ),
       ],
     );
   }
